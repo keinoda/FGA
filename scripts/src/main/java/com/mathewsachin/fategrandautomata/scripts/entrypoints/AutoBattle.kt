@@ -186,6 +186,7 @@ class AutoBattle @Inject constructor(
 
         // Loop through SCREENS until a Validator returns true
         while (true) {
+
             val actor = useSameSnapIn {
                 screens
                     .asSequence()
@@ -196,7 +197,9 @@ class AutoBattle @Inject constructor(
 
             actor?.invoke()
 
-            1.seconds.wait()
+            0.6.seconds.wait()
+
+            locations.battle.extraInfoWindowCloseClick.click(2)
         }
     }
 
