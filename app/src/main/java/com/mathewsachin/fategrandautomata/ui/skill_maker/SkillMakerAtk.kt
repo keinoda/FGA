@@ -2,9 +2,9 @@ package com.mathewsachin.fategrandautomata.ui.skill_maker
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FastForward
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.mathewsachin.fategrandautomata.R
 import com.mathewsachin.fategrandautomata.scripts.models.AutoSkillAction
 import com.mathewsachin.fategrandautomata.scripts.models.CommandCard
+import com.mathewsachin.fategrandautomata.ui.FGATitle
 import com.mathewsachin.fategrandautomata.ui.VectorIcon
 import com.mathewsachin.fategrandautomata.ui.icon
 
@@ -53,12 +54,12 @@ private fun SelectNps(
             }
 
             Surface(
-                elevation = 5.dp,
+                tonalElevation = 5.dp,
                 shape = MaterialTheme.shapes.medium,
                 color =
                 if (isSelected)
                     colorResource(selectedColor)
-                else MaterialTheme.colors.surface,
+                else MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier
                     .padding(5.dp),
                 onClick = onClick
@@ -90,12 +91,12 @@ private fun CardsBeforeNp(
                 val isSelected = cardsBeforeNp == it
 
                 Surface(
-                    elevation = 5.dp,
+                    tonalElevation = 5.dp,
                     shape = MaterialTheme.shapes.medium,
                     color =
                     if (isSelected)
                         colorResource(R.color.colorAccent)
-                    else MaterialTheme.colors.surface,
+                    else MaterialTheme.colorScheme.surfaceVariant,
                     modifier = Modifier
                         .padding(5.dp),
                     onClick = { onCardsBeforeNpChange(it) }
@@ -126,11 +127,8 @@ fun SkillMakerAtk(
             .fillMaxHeight()
             .padding(16.dp)
     ) {
-        Text(
-            stringResource(R.string.skill_maker_atk_header),
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
+        FGATitle(
+            stringResource(R.string.skill_maker_atk_header)
         )
 
         var npSequence by rememberSaveable { mutableStateOf("") }

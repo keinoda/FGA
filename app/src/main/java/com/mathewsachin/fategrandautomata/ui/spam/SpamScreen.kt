@@ -2,23 +2,36 @@ package com.mathewsachin.fategrandautomata.ui.spam
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.mathewsachin.fategrandautomata.R
 import com.mathewsachin.fategrandautomata.scripts.enums.SpamEnum
 import com.mathewsachin.fategrandautomata.scripts.models.SkillSpamTarget
+import com.mathewsachin.fategrandautomata.ui.FGAListItemColors
 import com.mathewsachin.fategrandautomata.ui.Heading
 import com.mathewsachin.fategrandautomata.ui.HeadingButton
 import com.mathewsachin.fategrandautomata.ui.prefs.MultiSelectChip
@@ -70,7 +83,7 @@ fun SpamScreen(
                     Box(
                         modifier = Modifier
                             .background(
-                                color = if (isSelected) MaterialTheme.colors.secondary else Color.Transparent,
+                                color = if (isSelected) MaterialTheme.colorScheme.secondary else Color.Transparent,
                                 shape = MaterialTheme.shapes.medium
                             )
                             .clickable { scope.launch { pagerState.animateScrollToPage(it - 1) } }
@@ -78,7 +91,7 @@ fun SpamScreen(
                     ) {
                         Text(
                             it.toString(),
-                            color = if (isSelected) MaterialTheme.colors.onSecondary else MaterialTheme.colors.onSurface
+                            color = if (isSelected) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
@@ -91,7 +104,7 @@ fun SpamScreen(
             HorizontalPager(
                 state = pagerState,
                 verticalAlignment = Alignment.Top,
-                count = vm.spamStates.size
+                pageCount = vm.spamStates.size
             ) {
                 SpamView(
                     selectedConfig = vm.spamStates[it]
@@ -240,10 +253,11 @@ private fun SelectSpamMode(
     )
 
     ListItem(
-        text = { Text(stringResource(R.string.spam)) },
-        secondaryText = { Text(stringResource(selected.stringRes)) },
+        headlineContent = { Text(stringResource(R.string.spam)) },
+        supportingContent = { Text(stringResource(selected.stringRes)) },
         modifier = modifier
-            .clickable { dialog.show() }
+            .clickable { dialog.show() },
+        colors = FGAListItemColors()
     )
 }
 
@@ -261,10 +275,11 @@ private fun SelectTarget(
     )
 
     ListItem(
-        text = { Text(stringResource(R.string.spam_target)) },
-        secondaryText = { Text(selected.toString()) },
+        headlineContent = { Text(stringResource(R.string.spam_target)) },
+        supportingContent = { Text(selected.toString()) },
         modifier = modifier
-            .clickable { dialog.show() }
+            .clickable { dialog.show() },
+        colors = FGAListItemColors()
     )
 }
 

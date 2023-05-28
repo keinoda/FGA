@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.IconButton
-import androidx.compose.material.ListItem
-import androidx.compose.material.Text
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.mathewsachin.fategrandautomata.R
 import com.mathewsachin.fategrandautomata.ui.DimmedIcon
+import com.mathewsachin.fategrandautomata.ui.FGAListItemColors
 import com.mathewsachin.fategrandautomata.ui.FgaDialog
 import com.mathewsachin.fategrandautomata.ui.Stepper
 import com.mathewsachin.fategrandautomata.ui.icon
@@ -43,9 +44,10 @@ fun FineTuneItem.FineTuneSetter() {
     Column {
         Row {
             ListItem(
-                text = { Text(stringResource(name)) },
-                secondaryText = { Text(defaultString) },
-                modifier = Modifier.weight(1f)
+                headlineContent = { Text(stringResource(name)) },
+                supportingContent = { Text(defaultString) },
+                modifier = Modifier.weight(1f),
+                colors = FGAListItemColors()
             )
 
             IconButton(

@@ -1,12 +1,13 @@
 package com.mathewsachin.fategrandautomata.ui.exit
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -84,7 +85,7 @@ private fun LazyListScope.battleExitContent(
     item {
         Text(
             reason.text(),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.titleLarge,
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .padding(bottom = 16.dp, top = 5.dp)
@@ -120,7 +121,7 @@ private fun LazyListScope.battleExitContent(
         item {
             Text(
                 stringResource(R.string.ces_dropped, state.ceDropCount),
-                color = MaterialTheme.colors.secondary,
+                color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier
                     .padding(16.dp, 5.dp)
             )
@@ -173,7 +174,7 @@ private fun LazyListScope.battleExitContent(
         item {
             Text(
                 stringResource(R.string.times_withdrew, state.withdrawCount),
-                color = MaterialTheme.colors.error,
+                color = MaterialTheme.colorScheme.error,
                 modifier = Modifier
                     .padding(16.dp, 5.dp)
             )
@@ -227,7 +228,7 @@ private fun MaterialSummary(
 
                     Text(
                         "x$count",
-                        color = MaterialTheme.colors.secondary
+                        color = MaterialTheme.colorScheme.secondary
                     )
                 }
             }
@@ -262,7 +263,7 @@ private fun SmallChip(
 
             Text(
                 text,
-                style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.typography.titleSmall
             )
         }
     }
@@ -304,8 +305,8 @@ fun BattleExit(
                 ) {
                     Text(
                         stringResource(R.string.stop_after_this_run),
-                        style = MaterialTheme.typography.body2,
-                        color = MaterialTheme.colors.secondary
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary
                     )
 
                     var stopAfterThisRun by prefsCore.stopAfterThisRun.remember()
@@ -347,7 +348,8 @@ fun BattleExit(
     }
 }
 
-@Preview
+@Preview(name = "Light Mode", widthDp = 600, heightDp = 300)
+@Preview(name = "Dark Mode", widthDp = 600, heightDp = 300, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewBattleExitContent() {
     FGATheme {

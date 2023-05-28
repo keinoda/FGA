@@ -94,7 +94,6 @@
     <string name="p_limit">제한</string>
     <string name="p_runs">반복</string>
     <string name="p_roll_limit">뽑기 횟수 제한</string>
-    <string name="p_prevent_lottery_box_reset">룰렛 초기화 방지</string>
     <string name="p_receive_embers">종화 자동 수령</string>
 
     <string name="p_battle_config_name">이름</string>
@@ -153,8 +152,6 @@
     <string name="p_advanced">고급</string>
     <string name="p_debug_mode">디버그 모드</string>
     <string name="p_debug_mode_summary">대조되고 있는 부분 표시하기</string>
-    <string name="p_ignore_notch">노치(카메라 구멍) 계산 무시</string>
-    <string name="p_ignore_notch_summary">페그오에서 노치 부분이 검정색으로 나오지 않을 경우 활성화 하세요.</string>
     <string name="p_record_screen">화면 녹화</string>
     <string name="p_record_screen_summary">\'record.mp4\'라는 파일이 지정된 폴더에 저장됩니다.\n저장하려면 복사하거나 이름을 바꿔주세요.</string>
     <string name="p_root_screenshot">루트 권한으로 스크린샷 하기</string>
@@ -258,7 +255,6 @@
     <string name="screen_turned_off">화면 꺼짐으로인해 스크립트 중지됨</string>
     <string name="unexpected_error">예상 밖의 오류</string>
     <string name="script_exited">스크립트 빠져나옴</string>
-    <string name="lottery_reset_disabled">룰렛 초기화 비활성화</string>
     <string name="inventory_full">인벤토리 꽉 참</string>
     <string name="present_box_full">선물함 꽉 참</string>
     <string name="support_img_maker_not_found">현재 화면에서 서포트 이미지를 찾을 수 없습니다. 서포트 창이나 친구 목록에 계신가요?</string>
@@ -273,7 +269,7 @@
     <string name="times_ran">%d번 반복함</string>
     <string name="times_ran_out_of">%2$d번 중 %1$d번 반복함</string>
     <string name="refills_used_out_of">%2$d번 중 %1$d번 사과 사용</string>
-    <string name="failed_to_determine_card_type">카드 유형 확인 실패: %s</string>
+    <string name="failed_to_determine_card">카드 유형 확인 실패: %s</string>
     <string name="support_list_updated_in">서포트 리스트가 %s 안에 갱신됩니다</string>
     <string name="times_withdrew">%d번 철수함</string>
     <string name="avg_time_per_run">반복 평균 시간: %s</string>
@@ -332,14 +328,14 @@
     <string name="mat_arrow">재난의 화살촉</string>
     <string name="mat_tiara">광은의 관</string>
     <string name="mat_particle">신맥영자</string>
-    <string name="mat_thread">무지개 실구슬</string>
+    <string name="mat_thread">무지갯빛 실타리</string>
     <string name="mat_mirror">구십구경</string>
     <string name="mat_egg">진리의 알</string>
     <string name="mat_star_shard">황성의 조각</string>
     <string name="mat_fruit">유구의 열매</string>
-    <string name="mat_demon_lantern">귀염귀등</string>
+    <string name="mat_demon_lantern">도깨비불 꽈리</string>
     <string name="mat_amnesty_bell">사면의 작은 종</string>
-    <string name="mat_fantasy_scales">몽환의 인분</string>
+    <string name="mat_fantasy_scales">몽환의 비늘가루</string>
     <string name="mat_ceremonial_blade">황혼의 의식검</string>
     <string name="mat_ashes">잊을 수 없는 재</string>
 
@@ -393,7 +389,6 @@
     <string name="p_game_area_mode">게임 영역 설정</string>
     <string name="p_game_area_default">기본값</string>
     <string name="p_game_area_duo">Surface Duo</string>
-    <string name="p_game_area_xperia">Sony Xperia</string>
     <string name="p_game_area_custom">사용자 지정</string>
     <string name="p_game_area_custom_left">좌측 좌표</string>
     <string name="p_game_area_custom_top">상단 좌표</string>

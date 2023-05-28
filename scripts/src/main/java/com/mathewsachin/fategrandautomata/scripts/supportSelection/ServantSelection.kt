@@ -11,8 +11,8 @@ import com.mathewsachin.libautomata.Pattern
 import com.mathewsachin.libautomata.Region
 import com.mathewsachin.libautomata.Size
 import com.mathewsachin.libautomata.dagger.ScriptScope
+import java.util.stream.Collectors
 import javax.inject.Inject
-import kotlin.streams.toList
 
 @ScriptScope
 class ServantSelection @Inject constructor(
@@ -53,7 +53,7 @@ class ServantSelection @Inject constructor(
                         .stream()
                 }
             }
-            .toList()
+            .collect(Collectors.toList())
             .sortedBy { it.Support }
 
     /**
@@ -84,10 +84,7 @@ class ServantSelection @Inject constructor(
         val y = bounds.y + 325
         val x = bounds.x + 1620
 
-        val skillMargin = when (prefs.gameServer) {
-            GameServerEnum.Jp, GameServerEnum.Cn, GameServerEnum.En, GameServerEnum.Kr -> 90
-            else -> 155
-        }
+        val skillMargin = 90
 
         val skillLoc = listOf(
             Location(x, y),

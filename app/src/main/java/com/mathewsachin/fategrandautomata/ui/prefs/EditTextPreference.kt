@@ -4,10 +4,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -50,15 +60,17 @@ fun PreferenceTextEditor(
     TextField(
         value = textFieldValue,
         onValueChange = { textFieldValue = it },
-        label = { Text(label, color = MaterialTheme.colors.onBackground.copy(0.8f)) },
+        label = { Text(label, color = MaterialTheme.colorScheme.onBackground.copy(0.8f)) },
         modifier = modifier
             .fillMaxWidth()
             .focusRequester(focusRequester),
         isError = !valid,
         keyboardOptions = keyboardOptions,
-        textStyle = TextStyle(MaterialTheme.colors.onBackground, fontSize = 16.sp),
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.Transparent
+        textStyle = TextStyle(MaterialTheme.colorScheme.onBackground, fontSize = 16.sp),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent,
+            disabledContainerColor = Color.Transparent,
         ),
         keyboardActions = KeyboardActions(
             onDone = {
@@ -77,7 +89,7 @@ fun PreferenceTextEditor(
                     Icon(
                         painterResource(R.drawable.ic_close),
                         contentDescription = stringResource(android.R.string.cancel),
-                        tint = MaterialTheme.colors.error
+                        tint = MaterialTheme.colorScheme.error
                     )
                 }
 
@@ -110,7 +122,7 @@ fun Pref<String>.EditTextPreference(
     icon: VectorIcon? = null,
     enabled: Boolean = true,
     summary: (String) -> String = { it },
-    validate: (String) -> Boolean = { true}
+    validate: (String) -> Boolean = { true }
 ) {
     var state by remember()
     var editing by remember { mutableStateOf(false) }
@@ -132,8 +144,7 @@ fun Pref<String>.EditTextPreference(
             keyboardOptions = keyboardOptions,
             modifier = modifier
         )
-    }
-    else {
+    } else {
         Preference(
             title = title,
             summary = summary(state),

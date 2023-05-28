@@ -2,7 +2,6 @@ package com.mathewsachin.fategrandautomata.scripts.modules
 
 import com.mathewsachin.fategrandautomata.scripts.IFgoAutomataApi
 import com.mathewsachin.fategrandautomata.scripts.Images
-import com.mathewsachin.fategrandautomata.scripts.enums.GameServerEnum
 import com.mathewsachin.fategrandautomata.scripts.enums.SpamEnum
 import com.mathewsachin.fategrandautomata.scripts.models.*
 import com.mathewsachin.fategrandautomata.scripts.models.battle.BattleState
@@ -29,16 +28,6 @@ class Caster @Inject constructor(
 
     private fun waitForAnimationToFinish(timeout: Duration = 5.seconds) {
         val img = images[Images.BattleScreen]
-
-        if (prefs.gameServer in listOf(GameServerEnum.Jp, GameServerEnum.Kr)) {
-            // Skip Skill Animation. See #1319
-            locations.battle.skipAnimationClick.click()
-        } else {
-            // Without this fixed wait, a vanishing Attack button may be detected as Schrödinger's cat - not present but also present
-            // See #1341
-            0.5.seconds.wait()
-        }
-
         // slow devices need this. do not remove.
         locations.battle.screenCheckRegion.waitVanish(img, 2.seconds)
         locations.battle.screenCheckRegion.exists(img, timeout)
@@ -50,7 +39,10 @@ class Caster @Inject constructor(
         }
     }
 
-    private fun castSkill(skill: Skill, target: ServantTarget?) {
+    private fun castSkill(skill: Skill, target: ServantTarget?) =
+        castSkill(skill, listOfNotNull(target))
+
+    private fun castSkill(skill: Skill, targets: List<ServantTarget>) {
         when (skill) {
             is Skill.Master -> locations.battle.master.locate(skill)
             is Skill.Servant -> locations.battle.locate(skill)
@@ -58,21 +50,25 @@ class Caster @Inject constructor(
 
         confirmSkillUse()
 
-        if (target != null) {
+        targets.forEach { target ->
             prefs.skillDelay.wait()
 
             selectSkillTarget(target)
-        } else {
-            // Close the window that opens up if skill is on cool-down
-            locations.battle.extraInfoWindowCloseClick.click()
         }
+
+        // Close the window that opens up if skill is on cool-down
+        // Also triggers skill speedup for FGO servers with that feature
+        // If we wait for too long here, the vanishing Attack button will not be detected in waitForAnimationToFinish()
+        locations.battle.extraInfoWindowCloseClick.click()
 
         waitForAnimationToFinish()
     }
 
-    fun castServantSkill(skill: Skill.Servant, target: ServantTarget?) {
+    fun castServantSkill(skill: Skill.Servant, target: ServantTarget?) =
         castSkill(skill, target)
-    }
+
+    fun castServantSkill(skill: Skill.Servant, targets: List<ServantTarget>) =
+        castSkill(skill, targets)
 
     fun selectSkillTarget(target: ServantTarget) {
         val actualTarget = when (target) {
@@ -103,11 +99,6 @@ class Caster @Inject constructor(
         }
 
         locations.battle.locate(actualTarget).click()
-
-        0.5.seconds.wait()
-
-        // Exit any extra menu
-        locations.battle.extraInfoWindowCloseClick.click()
     }
 
     private fun openMasterSkillMenu() {
@@ -140,7 +131,9 @@ class Caster @Inject constructor(
         locations.battle.orderChangeOkClick.click()
 
         // Extra wait to allow order change dialog to close
-        1.seconds.wait()
+        0.3.seconds.wait()
+        // speed up animation
+        locations.battle.extraInfoWindowCloseClick.click()
 
         waitForAnimationToFinish(15.seconds)
 

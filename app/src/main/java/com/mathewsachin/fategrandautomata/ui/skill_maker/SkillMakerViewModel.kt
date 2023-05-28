@@ -18,7 +18,7 @@ class SkillMakerViewModel @Inject constructor(
 ) : ViewModel() {
     val navigation = mutableStateOf<SkillMakerNav>(SkillMakerNav.Main)
 
-    val state = savedState.get(::savedState.name)
+    val state = savedState[::savedState.name]
         ?: SkillMakerSavedState()
 
     private val model: SkillMakerModel = if (state.skillString != null) {
@@ -69,7 +69,7 @@ class SkillMakerViewModel @Inject constructor(
             currentIndex = currentIndex.value
         )
 
-        savedState.set(::savedState.name, saveState)
+        savedState[::savedState.name] = saveState
     }
 
     override fun onCleared() {
@@ -154,14 +154,18 @@ class SkillMakerViewModel @Inject constructor(
     }
 
     fun targetSkill(target: ServantTarget?) {
+        targetSkill(listOfNotNull(target))
+    }
+
+    fun targetSkill(targets: List<ServantTarget>) {
         val skill = (Skill.Servant.list + Skill.Master.list)
             .first { it.autoSkillCode == currentSkill }
 
         add(
             SkillMakerEntry.Action(
                 when (skill) {
-                    is Skill.Servant -> AutoSkillAction.ServantSkill(skill, target)
-                    is Skill.Master -> AutoSkillAction.MasterSkill(skill, target)
+                    is Skill.Servant -> AutoSkillAction.ServantSkill(skill, targets)
+                    is Skill.Master -> AutoSkillAction.MasterSkill(skill, targets.firstOrNull())
                 }
             )
         )

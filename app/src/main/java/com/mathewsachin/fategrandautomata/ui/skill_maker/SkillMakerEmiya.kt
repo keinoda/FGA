@@ -1,9 +1,10 @@
 package com.mathewsachin.fategrandautomata.ui.skill_maker
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,6 +15,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mathewsachin.fategrandautomata.R
+import com.mathewsachin.fategrandautomata.ui.FGATheme
+import com.mathewsachin.fategrandautomata.ui.FGATitle
 
 @Composable
 fun SkillMakerEmiya(
@@ -25,11 +28,8 @@ fun SkillMakerEmiya(
             .fillMaxHeight()
             .padding(16.dp)
     ) {
-        Text(
-            stringResource(R.string.skill_maker_emiya),
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
+        FGATitle(
+            stringResource(R.string.skill_maker_emiya)
         )
 
         Row(
@@ -62,7 +62,7 @@ fun TargetButton(
 ) {
     Button(
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(backgroundColor = color),
+        colors = ButtonDefaults.buttonColors(containerColor = color),
         modifier = Modifier.size(120.dp)
     ) {
         Text(
@@ -73,8 +73,11 @@ fun TargetButton(
     }
 }
 
-@Preview(widthDp = 600, heightDp = 300)
+@Preview(name = "Light Mode", widthDp = 600, heightDp = 300)
+@Preview(name = "Dark Mode", widthDp = 600, heightDp = 300, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun TestEmiya() {
-    SkillMakerEmiya(onArts = { }, onBuster = { })
+    FGATheme {
+        SkillMakerEmiya(onArts = { }, onBuster = { })
+    }
 }

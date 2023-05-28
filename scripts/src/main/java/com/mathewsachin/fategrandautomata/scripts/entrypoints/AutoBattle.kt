@@ -180,13 +180,12 @@ class AutoBattle @Inject constructor(
             { isFriendRequestScreen() } to { skipFriendRequestScreen() },
             { isBond10CEReward() } to { bond10CEReward() },
             { isCeRewardDetails() } to { ceRewardDetails() },
-            { isDeathAnimation() } to { locations.battle.skipAnimationClick.click() }
+            { isDeathAnimation() } to { locations.battle.extraInfoWindowCloseClick.click() }
 
         )
 
         // Loop through SCREENS until a Validator returns true
         while (true) {
-
             val actor = useSameSnapIn {
                 screens
                     .asSequence()
@@ -197,9 +196,7 @@ class AutoBattle @Inject constructor(
 
             actor?.invoke()
 
-            0.6.seconds.wait()
-
-            locations.battle.extraInfoWindowCloseClick.click(2)
+            0.5.seconds.wait()
         }
     }
 
@@ -415,12 +412,14 @@ class AutoBattle @Inject constructor(
 
     /**
      * Will show a toast informing the user of number of runs and how many apples have been used so far.
+     * Also shows CE drop count (if any have dropped).
      */
     private fun showRefillsAndRunsMessage() =
         messages.notify(
             ScriptNotify.BetweenRuns(
                 refills = refill.timesRefilled,
-                runs = state.runs
+                runs = state.runs,
+                ceDrops = ceDropsTracker.count
             )
         )
 

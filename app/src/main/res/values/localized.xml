@@ -65,6 +65,9 @@
     <string name="skill_maker_quick">Quick</string>
     <string name="skill_maker_arts">Arts</string>
     <string name="skill_maker_buster">Buster</string>
+    <string name="skill_maker_kukulcan">Kukulcan</string>
+    <string name="skill_maker_option_1">Option 1</string>
+    <string name="skill_maker_option_2">Option 2</string>
 
     <string name="card_priority_wave_number">WAVE %d</string>
     <string name="card_priority_high">HIGH</string>
@@ -94,7 +97,6 @@
     <string name="p_limit">Limit</string>
     <string name="p_runs">Runs</string>
     <string name="p_roll_limit">Limit number of rolls</string>
-    <string name="p_prevent_lottery_box_reset">Prevent box reset</string>
     <string name="p_receive_embers">Receive embers</string>
 
     <string name="p_battle_config_name">Name</string>
@@ -153,8 +155,6 @@
     <string name="p_advanced">Advanced</string>
     <string name="p_debug_mode">Debug mode</string>
     <string name="p_debug_mode_summary">Highlight the regions being matched</string>
-    <string name="p_ignore_notch">Ignore Notch calculation</string>
-    <string name="p_ignore_notch_summary">Turn this ON if FGO doesn\'t leave the notch area blank</string>
     <string name="p_record_screen">Record Screen</string>
     <string name="p_record_screen_summary">A file named \'record.mp4\' will be saved to output folder.\nCopy or rename it if you want to keep it.</string>
     <string name="p_root_screenshot">Use Root for Screenshots</string>
@@ -258,7 +258,7 @@
     <string name="screen_turned_off">Script paused due to screen turning off</string>
     <string name="unexpected_error">Unexpected Error</string>
     <string name="script_exited">Script Exited</string>
-    <string name="lottery_reset_disabled">Lottery box reset is disabled</string>
+    <string name="lottery_currency_depleted">Ran out of lottery currency</string>
     <string name="inventory_full">Inventory Full</string>
     <string name="present_box_full">Present Box Full</string>
     <string name="support_img_maker_not_found">No support images were found on the current screen. Are you on Support selection or Friend list screen?</string>
@@ -273,7 +273,9 @@
     <string name="times_ran">Ran %d time(s)</string>
     <string name="times_ran_out_of">Ran %1$d out of %2$d time(s)</string>
     <string name="refills_used_out_of">%1$d refills used out of %2$d</string>
-    <string name="failed_to_determine_card_type">Failed to determine Card type: %s</string>
+    <string name="failed_to_determine_card">Failed to determine Card: %s</string>
+    <string name="unknown_card_type">Card type could not be detected (Buster, Quick, Arts)</string>
+    <string name="unknown_servant_card">Card belongs to an unknown Servant</string>
     <string name="support_list_updated_in">Support list will be updated in %s</string>
     <string name="times_withdrew">Withdrew %d times</string>
     <string name="avg_time_per_run">Average time per run: %s</string>
@@ -393,7 +395,6 @@
     <string name="p_game_area_mode">Game Area Mode</string>
     <string name="p_game_area_default">Default</string>
     <string name="p_game_area_duo">Surface Duo</string>
-    <string name="p_game_area_xperia">Sony Xperia</string>
     <string name="p_game_area_custom">Custom</string>
     <string name="p_game_area_custom_left">Left</string>
     <string name="p_game_area_custom_top">Top</string>

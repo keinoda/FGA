@@ -18,7 +18,6 @@ interface IPreferences {
     val boostItemSelectionMode: Int
     val refill: IRefillPreferences
     var waitAPRegen: Boolean
-    val ignoreNotchCalculation: Boolean
     val useRootForScreenshots: Boolean
     val recordScreen: Boolean
     val skillDelay: Duration
@@ -30,7 +29,6 @@ interface IPreferences {
 
     var shouldLimitFP: Boolean
     var limitFP: Int
-    var preventLotteryBoxReset: Boolean
     var receiveEmbersWhenGiftBoxFull: Boolean
 
     val stageCounterSimilarity: Double

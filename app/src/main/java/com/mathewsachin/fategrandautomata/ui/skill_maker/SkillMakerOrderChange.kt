@@ -1,10 +1,11 @@
 package com.mathewsachin.fategrandautomata.ui.skill_maker
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,9 +17,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mathewsachin.fategrandautomata.R
 import com.mathewsachin.fategrandautomata.scripts.models.OrderChangeMember
+import com.mathewsachin.fategrandautomata.ui.FGATheme
+import com.mathewsachin.fategrandautomata.ui.FGATitle
 
 @Composable
 fun SkillMakerOrderChange(
@@ -33,11 +37,8 @@ fun SkillMakerOrderChange(
             .fillMaxHeight()
             .padding(16.dp)
     ) {
-        Text(
-            stringResource(R.string.skill_maker_order_change_header),
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
+        FGATitle(
+            stringResource(R.string.skill_maker_order_change_header)
         )
 
         Row(
@@ -100,12 +101,12 @@ fun OrderChangeSide(
             }
 
             Surface(
-                elevation = 5.dp,
+                tonalElevation = 5.dp,
                 shape = MaterialTheme.shapes.medium,
                 color =
-                    if (isSelected)
-                        colorResource(selectedColor)
-                    else MaterialTheme.colors.surface,
+                if (isSelected)
+                    colorResource(selectedColor)
+                else MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier
                     .padding(5.dp),
                 onClick = { onSelectedChange(it) }
@@ -115,11 +116,20 @@ fun OrderChangeSide(
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(16.dp),
                     color =
-                        if (isSelected)
-                            Color.White
-                        else Color.Unspecified
+                    if (isSelected)
+                        Color.White
+                    else Color.Unspecified
                 )
             }
         }
+    }
+}
+
+@Preview(name = "Light Mode", widthDp = 600, heightDp = 300)
+@Preview(name = "Dark Mode", widthDp = 600, heightDp = 300, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun TestOrderChange() {
+    FGATheme {
+        SkillMakerOrderChange(onCommit = { _, _ -> }, onCancel = { })
     }
 }

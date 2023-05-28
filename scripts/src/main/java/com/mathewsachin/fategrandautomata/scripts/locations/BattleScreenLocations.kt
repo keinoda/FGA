@@ -26,6 +26,8 @@ class BattleScreenLocations @Inject constructor(
         ServantTarget.C -> 660
         ServantTarget.Left -> -290
         ServantTarget.Right -> 330
+        ServantTarget.Option1 -> 0
+        ServantTarget.Option2 -> 470
     }.let { x -> Location(x, 880) }.xFromCenter()
 
     fun locate(skill: Skill.Servant) = when (skill) {
@@ -82,8 +84,6 @@ class BattleScreenLocations @Inject constructor(
     val orderChangeOkClick = Location(0, 1260).xFromCenter()
     val extraInfoWindowCloseClick = Location(-50, 50).xFromRight()
 
-    val skipAnimationClick = Location(-860, 200).xFromRight()
-
     fun servantOpenDetailsClick(slot: FieldSlot) =
         Location(locate(slot.skill2()).x, 810)
 
@@ -91,7 +91,7 @@ class BattleScreenLocations @Inject constructor(
         slot.skill2().let {
             val x = locate(it).x
 
-            Region(x + 20, 910, 40, 80)
+            Region(x + 20, 865, 40, 80)
         }
 
     fun servantChangeSupportCheckRegion(slot: FieldSlot) =

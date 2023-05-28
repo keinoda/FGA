@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 30
+        targetSdkVersion 32
     }
 
     buildTypes {
@@ -29,11 +29,11 @@ android {
 
 dependencies {
     implementation project(':scripts')
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
     implementation "com.google.code.gson:gson:$gson_version"
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
-    api 'com.fredporciuncula:flow-preferences:1.8.0'
+    api 'com.fredporciuncula:flow-preferences:1.9.1'
 }

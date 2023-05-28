@@ -3,13 +3,28 @@ package com.mathewsachin.fategrandautomata.ui.launcher
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -67,7 +82,7 @@ fun battleLauncher(
                         state = configListState,
                         hiddenAlpha = 0.3f,
                         horizontal = false,
-                        knobColor = MaterialTheme.colors.secondary
+                        knobColor = MaterialTheme.colorScheme.secondary
                     ),
                 state = configListState
             ) {
@@ -92,7 +107,7 @@ fun battleLauncher(
             modifier = Modifier
                 .fillMaxHeight()
                 .padding(5.dp, 2.dp)
-                .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f))
+                .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f))
                 .width(1.dp)
         ) { }
 
@@ -104,9 +119,9 @@ fun battleLauncher(
                     state = mainConfigState,
                     hiddenAlpha = 0.3f,
                     horizontal = false,
-                    knobColor = MaterialTheme.colors.secondary,
+                    knobColor = MaterialTheme.colorScheme.secondary,
                     // needs to be adjusted when adding new items
-                    fixedKnobRatio = 0.69f
+                    fixedKnobRatio = 0.81f
                 )
                 .padding(start = 5.dp),
             state = mainConfigState
@@ -119,8 +134,8 @@ fun battleLauncher(
                 ) {
                     Text(
                         "${stringResource(R.string.p_refill)}:",
-                        style = MaterialTheme.typography.body2,
-                        color = MaterialTheme.colors.secondary
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary
                     )
 
                     Stepper(
@@ -138,10 +153,10 @@ fun battleLauncher(
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    //only display bronze option for JP
-                    val bronzeApplesEnabled = prefs.gameServer == GameServerEnum.Jp
+                    //only display bronze option for JP and CN
+                    val bronzeApplesEnabled = prefs.gameServer in listOf(GameServerEnum.Jp, GameServerEnum.Cn)
                     if (!bronzeApplesEnabled) {
-                        //if the game server is not JP, disable it in the settings
+                        //disable it in the settings otherwise
                         refillResources = refillResources.minus(RefillResourceEnum.Bronze)
                     }
                     //TODO remove
@@ -180,7 +195,7 @@ fun battleLauncher(
 
                     Text(
                         stringResource(R.string.p_wait_ap_regen_text),
-                        style = MaterialTheme.typography.body2
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
 
@@ -190,8 +205,8 @@ fun battleLauncher(
             item {
                 Text(
                     stringResource(R.string.p_limit),
-                    style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.secondary
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.secondary
                 )
             }
 
@@ -272,7 +287,7 @@ fun LimitItem(
 
             Text(
                 "$text:",
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.bodyMedium
             )
         }
 
@@ -295,7 +310,7 @@ fun BattleConfigItem(
         modifier = Modifier
             .padding(3.dp)
             .background(
-                color = if (isSelected) MaterialTheme.colors.primary else Color.Transparent,
+                color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent,
                 shape = MaterialTheme.shapes.medium
             )
             .clickable(onClick = onSelected)
@@ -304,7 +319,7 @@ fun BattleConfigItem(
     ) {
         Text(
             name,
-            color = if (isSelected) MaterialTheme.colors.onPrimary else Color.Unspecified
+            color = if (isSelected) MaterialTheme.colorScheme.onPrimary else Color.Unspecified
         )
     }
 }
@@ -321,7 +336,7 @@ fun RefillResourceEnum.RefillResource(
             .padding(end = 6.dp)
             .border(
                 width = 1.dp,
-                brush = SolidColor(if (isSelected) MaterialTheme.colors.primary else Color.Transparent),
+                brush = SolidColor(if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent),
                 shape = MaterialTheme.shapes.medium
             )
             .clickable(onClick = toggle)
@@ -329,8 +344,8 @@ fun RefillResourceEnum.RefillResource(
     ) {
         Text(
             stringResource(stringRes),
-            style = MaterialTheme.typography.overline,
-            color = if (isSelected) MaterialTheme.colors.primary else Color.Unspecified
+            style = MaterialTheme.typography.labelSmall,
+            color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Unspecified
         )
     }
 }
